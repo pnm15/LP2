@@ -1,2 +1,2 @@
 # LP2
-##Aluno: Pedro Neves Maia
+Aluno: Pedro Neves Maia
