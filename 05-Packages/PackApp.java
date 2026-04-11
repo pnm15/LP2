@@ -1,8 +1,8 @@
+import figuras.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
-import figures.*;
 
 class PackApp {
     public static void main (String[] args) {
@@ -28,7 +28,7 @@ class PackFrame extends JFrame {
         this.setSize(350, 350);
         this.r1 = new Rect(50,50, 100,30);
         this.e1 = new Ellipse(50,100, 100,30);
-        this.t1= new Triangle(50,150,10,200,100,200,3)
+        this.t1 = new Triangle(new int[]{50, 100, 150},new int[]{180, 150, 180});
     }
 
     public void paint (Graphics g) {
