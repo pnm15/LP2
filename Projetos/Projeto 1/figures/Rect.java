@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Rect extends Figure {
     public Rect (int x, int y, int w, int h) {
-        super(x,y,w,h);
+        super(x,y, w,h);
     }
 
     public void print () {
