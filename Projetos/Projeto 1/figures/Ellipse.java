@@ -1,5 +1,5 @@
 package figures;
-import ivisible*;
+import ivisible.*;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
