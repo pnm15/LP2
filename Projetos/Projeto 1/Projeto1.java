@@ -12,7 +12,8 @@ public class PackApp {
        PackFrame frame = new PackFrame();
         frame.setVisible(true);
      }
-} 
+}  
+
 class PackFrame extends JFrame {
     ArrayList<Figure> figs = new ArrayList<Figure>();
     Figure focus = null;
@@ -26,28 +27,37 @@ class PackFrame extends JFrame {
                     }
                 }
             );
-//Foco quando a figura é selecioanada pelo cursor do mouse
-        this.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent evt) {
-                focus = null;
-                for (Figure fig : figs) {
-                    if (fig.x <= evt.getX() && fig.y >= evt.getY()) {
-                        focus = fig;
+        this.addMouseListener (new MouseAdapter() {
+                public void mousePressed (MouseEvent evt) {
+                    focus = null;
+                    for (Figure fig : figs) {
+                        int sum1=fig.x+fig.w;
+                        int sum2=fig.y+fig.h;
+                        if (fig.x <= evt.getX() && evt.getX() <= sum1 ) {
+                            if (fig.y >= evt.getY() && evt.getY() >= sum2) {
+                            focus = fig;
+                            }
+                        }
+                    repaint();
                     }
                 }
+                public void mouseReleased( MouseEvent evt ) {
+                    focus=null;
+                    repaint();
+                }  
             }
+        );
+        this.addMouseMotionListener(
+            new MouseMotionAdapter() {
+                public void mouseDragged(MouseEvent evt) {
+                       for (Figure fig: figs) {
+                            if (focus==fig) {
+                                fig.x = evt.getX();
+                                fig.y = evt.getY();
+                            }
+                        }
+                }
         });
-//iterações quando a figura esta sendo arrastada no quadro
-        this.addMouseMotionListener(new MouseMotionAdapter() {
-            public void mouseDragged(MouseEvent evt) {
-            int x = evt.getX();
-            int y = evt.getY();
-            if (fig.x != evt.getX()) {
-       
-            }
-            repaint();
-        });
-//Adiciona as figuras no quadro e no vetor figs dependendo da tecla digitada
         this.addKeyListener (new KeyAdapter() {
             public void keyPressed (KeyEvent evt) {
                     int x = rand.nextInt(350);
@@ -64,10 +74,9 @@ class PackFrame extends JFrame {
                     repaint();
                 }
         });
-  this.setTitle("Editor grafico");
+        this.setTitle("Editor grafico");
         this.setSize(350, 350);
 }
-
         public void paint (Graphics g) {
             super.paint(g);
             for (Figure fig:this.figs) {
