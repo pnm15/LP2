@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-import figuras.*;
+import figures.*;
 import ivisible.*;
 public class PackApp {
      public static void main(String[] args) {
