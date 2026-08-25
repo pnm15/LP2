@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-import figures.*;
+import figuras.*;
 import ivisible.*;
 public class PackApp {
      public static void main(String[] args) {
@@ -31,18 +31,14 @@ class PackFrame extends JFrame {
                 public void mousePressed (MouseEvent evt) {
                     focus = null;
                     for (Figure fig : figs) {
-                        int sum1=fig.x+fig.w;
-                        int sum2=fig.y+fig.h;
-                        if (fig.x <= evt.getX() && evt.getX() <= sum1 ) {
-                            if (fig.y >= evt.getY() && evt.getY() >= sum2) {
+                        if (fig.x <= evt.getX() && evt.getX() <= (fig.x + fig.w)  ) {
+                            if (fig.y <= evt.getY() && evt.getY() <= (fig.y + fig.h)) {
                             focus = fig;
                             }
                         }
-                    repaint();
                     }
                 }
                 public void mouseReleased( MouseEvent evt ) {
-                    focus=null;
                     repaint();
                 }  
             }
@@ -60,17 +56,42 @@ class PackFrame extends JFrame {
         });
         this.addKeyListener (new KeyAdapter() {
             public void keyPressed (KeyEvent evt) {
-                    int x = rand.nextInt(350);
-                    int y = rand.nextInt(350);
-                    int w = rand.nextInt(50);
-                    int h = rand.nextInt(50);
+                    int x = rand.nextInt(100);
+                    int y = rand.nextInt(100);
+                    int w = rand.nextInt(100);
+                    int h = rand.nextInt(100);
+	            int c1 = rand.nextInt(256);
+		    int c2 = rand.nextInt(256);
+		    int c3 = rand.nextInt(256);
                     if (evt.getKeyChar() == 'r') {
-                        Rect r = new Rect(x,y, w,h);
+                        Rect r = new Rect(x,y, w,h,c1,c2,c3);
                         figs.add(r);
                     }
                     else if (evt.getKeyChar() == 'e') {
-                        figs.add(new Ellipse(x,y, w,h));
+                        figs.add(new Ellipse(x,y, w,h,c1,c2,c3));
                     }
+		    else if (evt.getKeyChar() == 's') {
+                        figs.add(new Square(x,y, h,h,c1,c2,c3));
+                    }
+	            else if (evt.getKeyChar() == 'c') {
+                        figs.add(new Circle(x,y, w,w,c1,c2,c3));
+                    }
+		    for (Figure fig: figs) {
+			if (focus==fig) {
+				if (fig.w<340 && fig.h<340) {
+		    			if (evt.getKeyChar() == 'i') {
+                        			fig.w +=5;
+                        			fig.h +=5;
+                    			}
+				}
+				if (fig.w>5 && fig.h>5) {
+		    			if (evt.getKeyChar() == 'd') {
+                        			fig.w -=5;
+                        			fig.h -=5;
+                    			}
+				}
+			}
+		    }
                     repaint();
                 }
         });
