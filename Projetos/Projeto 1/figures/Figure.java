@@ -1,4 +1,4 @@
-package figuras;
+package figures;
 import java.awt.Graphics;
 import ivisible.*;
 
