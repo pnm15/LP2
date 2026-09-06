@@ -2,7 +2,7 @@ Comandos:
 
 tecla 'i'= aumenta o tamanho da figura em foco,
 tecla 'd'= diminui o tamanho da figura em foco,
-clicar em teclas para definir as cores das figuras('g'-verde,'v'-vermelho,'b'-azul,
+clicar em teclas para definir as cores das figuras('g'-verde,'v'-vermelho,'b'-azul,    
 'y'-amarelo,'o'-laranja,'c'-cinza,'m'-magenta),
 clicar nas teclas que definem as cores antes de gerar as figuras,
 tecla 'r'= cria retangulos,
