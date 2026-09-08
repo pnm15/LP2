@@ -1,20 +1,21 @@
 package figures;
 import java.awt.Graphics;
 import ivisible.*;
+import java.awt.Color;
 
 public abstract class Figure implements IVisible {
     public int x, y;
     public int w, h;
-    public int c1,c2,c3;
+    public Color c;
+    public char k;
 
-    public Figure (int x, int y, int w, int h,int c1, int c2, int c3) {
+    public Figure (int x, int y, int w, int h, Color c,char k) {
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
-	this.c1 = c1;
-	this.c2 = c2;
-	this.c3 = c3;
+	    this.c=c;
+        this.k=k;
     }
 
     public void drag (int dx, int dy) {
