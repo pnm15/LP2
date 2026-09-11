@@ -14,7 +14,7 @@ public class Line extends Figure {
         System.out.format("linha de tamanho (%d,%d) na posicao (%d,%d).\n",
             this.w, this.h, this.x, this.y);
     }
-    @Override
+    
     public Figure foco (Figure fig,MouseEvent evt) { 
  			int maiorx=0;
 			int menory=0;
@@ -43,7 +43,7 @@ public class Line extends Figure {
 			}
 			return null;
     }
-    @Override
+    
     public int cantofig (Figure focus, Figure fig,MouseEvent evt) {
         if (focus==fig){
 		if (fig.x <= evt.getX() && evt.getX() <= (fig.x + 5)) {
@@ -59,7 +59,7 @@ public class Line extends Figure {
 	}
 	return 0;
     }
-     @Override
+     
      public void drag (Figure focus,Figure fig,MouseEvent evt,int cto) {
 	if (focus==fig) {
 		switch(cto) {
@@ -77,7 +77,7 @@ public class Line extends Figure {
 
 			case 2:
 				fig.w = evt.getX() - fig.x;
-        			fig.h = evt.getY() - fig.y;
+        		fig.h = evt.getY() - fig.y;
 			break;
 		}	
 	}
