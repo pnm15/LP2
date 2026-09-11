@@ -1,10 +1,10 @@
 package figures;
 import ivisible.*;
 import java.awt.*;
-
+import java.awt.event.*;
 public class Rect extends Figure {
-    public Rect (int x, int y, int w, int h, Color c,char k) {
-        super(x,y,w,h,c,k);
+    public Rect (int x, int y, int w, int h, Color c) {
+        super(x,y,w,h,c);
     }
     public void print () {
         System.out.format("Retangulo de tamanho (%d,%d) na posicao (%d,%d).\n",
