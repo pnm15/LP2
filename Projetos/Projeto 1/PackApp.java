@@ -31,16 +31,21 @@ class PackFrame extends JFrame {
             );
         this.addMouseListener (new MouseAdapter() {
                 public void mousePressed (MouseEvent evt) {
+                    ArrayList<Figure> f2 = new ArrayList<Figure>();
                     focus = null;
                     for (Figure fig : figs) {
-			if (fig.foco(fig,evt)!=null) {
-				focus=fig.foco ( fig,evt);
-				cto=fig.cantofig(focus, fig,evt);
-				dx=evt.getX()-fig.x;
-		    		dy=evt.getY()-fig.y;
-			}
-		    }
-		}	
+			            if (fig.foco(fig,evt)!=null) {
+				            focus=fig.foco ( fig,evt);
+				            cto=fig.cantofig(focus, fig,evt);
+				            dx=evt.getX()-fig.x;
+		    		        dy=evt.getY()-fig.y;
+			            }
+		            }
+		            if (focus!=null) {
+		                figs.remove(focus);
+		    		    figs.add(focus);
+		    		}
+		        }	
                 public void mouseReleased( MouseEvent evt ) {
                     repaint();
                 }  
@@ -50,7 +55,7 @@ class PackFrame extends JFrame {
             new MouseMotionAdapter() {
                 public void mouseDragged(MouseEvent evt) {
                        for (Figure fig: figs) {
-				fig.drag(focus, fig,evt,cto,dx,dy);
+				        fig.drag(focus, fig,evt,cto,dx,dy);
 				
                        }
 			repaint();
@@ -135,24 +140,15 @@ class PackFrame extends JFrame {
         public void paint (Graphics g) {
             super.paint(g);
             for (Figure fig:this.figs) {
-		int x=fig.x;
-		int y=fig.y;
-		int w=fig.w;
-		int h=fig.h;
+		        int x=fig.x;
+		        int y=fig.y;
+		        int w=fig.w;
+		        int h=fig.h;
                 fig.paint(g);
-		if (fig==focus) {
-			if (fig.w < 0) {
-   		 		x +=fig.w;
-    				w = -fig.w;
-			}
-
-			if (fig.h < 0) {
-    				y += fig.h;
-    				h = -fig.h;
-			}		
-    			g.setColor(Color.RED);
-    			g.drawRect(x, y, w, h);
-			}
-		}
-         }
+		        if (fig==focus) {
+			        g.setColor(Color.RED);
+    		        g.drawRect(x, y, w, h);
+		        }         
+		   }
+       }
 }
