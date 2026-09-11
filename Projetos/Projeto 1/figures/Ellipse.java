@@ -4,15 +4,16 @@ import ivisible.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Ellipse2D.Double;
+import java.awt.event.*;
 
 public class Ellipse extends Figure {
-    public Ellipse (int x, int y, int w, int h,Color c,char k) {
-        super(x,y,w,h,c,k);
+    public Ellipse (int x, int y, int w, int h,Color c) {
+        super(x,y,w,h,c);
     }
 
     public void print () {
         System.out.format("Elipse de tamanho (%d,%d) na posicao (%d,%d).\n",
-            this.w, this.h, this.x, this.y,this.c,this.k);
+            this.w, this.h, this.x, this.y,this.c);
     }
 
     public void paint (Graphics g) {
