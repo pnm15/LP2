@@ -20,6 +20,7 @@ class PackFrame extends JFrame {
     Random rand = new Random();
     int dx=0,dy=0;
     int cto=0;
+    int mx=0; int my=0;int mnx=0;int mny=0;
     Color c=null;
     PackFrame() {
         this.addWindowListener (
@@ -68,7 +69,7 @@ class PackFrame extends JFrame {
                     int y = rand.nextInt(100);
                     int w = rand.nextInt(100);
                     int h = rand.nextInt(100);
-		    int ang1 = rand.nextInt(20);
+		            int ang1 = rand.nextInt(20);
                     int ang2 = rand.nextInt(359);
 		    if (evt.getKeyChar() == 'g') {
                         c=Color.GREEN;
@@ -144,10 +145,18 @@ class PackFrame extends JFrame {
 		        int y=fig.y;
 		        int w=fig.w;
 		        int h=fig.h;
+		        if(fig.w<0) {
+   	                 w=-w;
+   	                 x-=w;
+   	                }
+   	            if(fig.h<0) {
+   	                 h=-h;
+   	                 y-=h;
+   	                }
                 fig.paint(g);
 		        if (fig==focus) {
-			        g.setColor(Color.RED);
-    		        g.drawRect(x, y, w, h);
+   	                 g.setColor(Color.RED);
+    		        g.drawRect(x, y, w, h);   
 		        }         
 		   }
        }
