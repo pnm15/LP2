@@ -17,7 +17,6 @@ public abstract class Figure implements IVisible {
         this.h = h;
 	this.c=c;
     }
-	
     public void drag (Figure focus,Figure fig,MouseEvent evt,int cto,int dx,int dy) {
 	if (focus==fig) {
 		switch(cto) {
