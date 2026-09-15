@@ -84,8 +84,7 @@ public class Line extends Figure {
 	return 0;
     }
      @Override
-     public void drag (Figure focus,Figure fig,MouseEvent evt,int cto,int dx,int dy) {
-	if (focus==fig) {
+     public void drag (Figure fig,MouseEvent evt,int cto,int dx,int dy) {
 		switch(cto) {
 			case 0:
 				fig.x = evt.getX()-dx;
@@ -108,7 +107,6 @@ public class Line extends Figure {
 			break;
 			}
 		}	
-	}
     public void paint (Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 	g2d.setColor(this.c);
