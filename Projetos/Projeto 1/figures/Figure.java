@@ -17,8 +17,7 @@ public abstract class Figure implements IVisible {
         this.h = h;
 	this.c=c;
     }
-    public void drag (Figure focus,Figure fig,MouseEvent evt,int cto,int dx,int dy) {
-	if (focus==fig) {
+    public void drag (Figure fig,MouseEvent evt,int cto,int dx,int dy) {
 		switch(cto) {
 			case 0:
 				fig.x = evt.getX()-dx;
@@ -66,13 +65,12 @@ public abstract class Figure implements IVisible {
 			break;
 		}
 	}	
-    }
-    public Figure  foco (Figure fig,MouseEvent evt) {
+    public Figure foco (Figure fig,MouseEvent evt) {
         if (fig.x <= evt.getX() && evt.getX() <= fig.x + fig.w) { 
-		if(fig.y <= evt.getY() && evt.getY() <= fig.y + fig.h) {
-			return fig;
-		}
-	}
+		    if(fig.y <= evt.getY() && evt.getY() <= fig.y + fig.h) {
+			    return fig;
+		    }
+	    }
 	return null;
     }
     public int cantofig (Figure focus,Figure fig,MouseEvent evt) {
@@ -100,8 +98,27 @@ public abstract class Figure implements IVisible {
 	}
 	return 0;
     }
+    public void paintfocus (Graphics g,Figure focus,Figure fig) {
+            int x=fig.x;
+		        int y=fig.y;
+		        int w=fig.w;
+		        int h=fig.h;
+            if (fig==focus) {
+                    if(fig.w<0) {
+   	                 w=-w;
+   	                 x-=w;
+   	                }
+   	            if(fig.h<0) {
+   	                 h=-h;
+   	                 y-=h;
+   	                }
+   	                 g.setColor(Color.RED);
+    		        g.drawRect(fig.x, fig.y, fig.w, fig.h);   
+		        }
+    
+    }
     public boolean clicked (int x, int y) {
         return (this.x<=x && x<=this.x+this.w && this.y<=y && y<=this.y+this.h);
     }
-    public abstract void paint (Graphics g);
-}
+    public abstract void paint (Graphics g) ;
+  } 
