@@ -19,7 +19,7 @@ class PackFrame extends JFrame {
     Figure focus = null;
     Random rand = new Random();
     int dx=0,dy=0;
-    int cto=0;
+    int cto=0;int i=0;
     int mx=0; int my=0;int mnx=0;int mny=0;
     Color c=null;
     PackFrame() {
@@ -36,7 +36,8 @@ class PackFrame extends JFrame {
                     focus = null;
                     for (Figure fig : figs) {
 			            if (fig.foco(fig,evt)!=null) {
-				            focus=fig.foco ( fig,evt);
+                            
+				            focus=fig.foco (fig,evt);
 				            cto=fig.cantofig(focus, fig,evt);
 				            dx=evt.getX()-fig.x;
 		    		        dy=evt.getY()-fig.y;
@@ -56,8 +57,9 @@ class PackFrame extends JFrame {
             new MouseMotionAdapter() {
                 public void mouseDragged(MouseEvent evt) {
                        for (Figure fig: figs) {
-				        fig.drag(focus, fig,evt,cto,dx,dy);
-				
+                        if (focus==fig) {
+				        fig.drag(fig,evt,cto,dx,dy);
+                        }
                        }
 			repaint();
                 }
@@ -65,10 +67,10 @@ class PackFrame extends JFrame {
         );
         this.addKeyListener (new KeyAdapter() {
             public void keyPressed (KeyEvent evt) {
-                    int x = rand.nextInt(100);
-                    int y = rand.nextInt(100);
-                    int w = rand.nextInt(100);
-                    int h = rand.nextInt(100);
+                    int x = 50;
+                    int y = 50;
+                    int w = 20;
+                    int h = 20;
 		            int ang1 = rand.nextInt(20);
                     int ang2 = rand.nextInt(359);
 		    if (evt.getKeyChar() == 'g') {
@@ -95,6 +97,19 @@ class PackFrame extends JFrame {
 		    if(c==null){
 			c=Color.BLACK;
 		    }
+                    if (evt.getKeyChar() == '1') {
+                        figs.add(new Carro(x,y, w,h,c));
+                    }
+                    if (evt.getKeyChar() == '2') {
+                        for (Figure fig: figs) {
+                            if (focus!=null) {
+                                int i=figs.indexOf(focus);
+                                focus=figs.get((i+1)%figs.size());
+                                break;
+                                }
+                            }
+                        }
+                    
                     if (evt.getKeyChar() == 'r') {
                         
                         Rect r = new Rect(x,y, w,h,c);
@@ -139,25 +154,12 @@ class PackFrame extends JFrame {
         this.setSize(350, 350);
 }
         public void paint (Graphics g) {
-            super.paint(g);
+                super.paint(g);
             for (Figure fig:this.figs) {
-		        int x=fig.x;
-		        int y=fig.y;
-		        int w=fig.w;
-		        int h=fig.h;
-		        if(fig.w<0) {
-   	                 w=-w;
-   	                 x-=w;
-   	                }
-   	            if(fig.h<0) {
-   	                 h=-h;
-   	                 y-=h;
-   	                }
                 fig.paint(g);
-		        if (fig==focus) {
-   	                 g.setColor(Color.RED);
-    		        g.drawRect(x, y, w, h);   
-		        }         
+                if (fig==focus) {
+                    fig.paintfocus(g,focus,fig);
+                }     
 		   }
        }
-}
+    }
