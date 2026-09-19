@@ -34,7 +34,7 @@ class cavalo implements movimento {
 /*2.o metodo guardar e retirar representam  
 ações de recipiente que podem ser realizadas, e
 o parametro objeto vai definir a partir de uma string,
-o que será guardado dentro das classes*/
+qual objeto será guardado dentro das classes*/
 interface recipiente {
 	int guardar(String objeto);
 	int retirar(String objeto);
