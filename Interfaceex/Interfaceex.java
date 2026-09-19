@@ -36,31 +36,31 @@ ações de recipiente que podem ser realizadas, e
 o parametro objeto vai definir a partir de uma string,
 qual objeto será guardado dentro das classes*/
 interface recipiente {
-	int guardar(String objeto);
-	int retirar(String objeto);
+	void  guardar(String objeto);
+	void  retirar(String objeto);
 }
 class caixa implements recipiente {
-	int guardar(String objeto) {
-		return 0;
+	void  guardar(String objeto) {
+		
 	}
-	int retirar(String objeto) {
-		return 0;
+	void  retirar(String objeto) {
+		
 	}
 }
 class armario implements recipiente {
-	int guardar(String objeto) {
-		return 0;
+	void  guardar(String objeto) {
+		
 	}
-	int retirar(String objeto) {
-		return 0;
+	void  retirar(String objeto) {
+		
 	}
 }
 class estante implements recipiente {
-	int guardar(String objeto) {
-		return 0;
+	void  guardar(String objeto) {
+		
 	}
-	int retirar(String objeto) {
-		return 0;
+	void  retirar(String objeto) {
+		
 	}
 }
 //1.
