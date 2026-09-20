@@ -6,14 +6,14 @@ typedef struct {
 } Color;
 
 struct Figure;
-typedef int (* Figure_area) (struct Figure*);
 typedef void (* Figure_Print) (struct Figure*);
+typedef int (* Figure_area) (struct Figure*);
 typedef void (* Figure_move) (struct Figure*,int,int);
 
 typedef struct {
-    void (* move) (struct Figure*);
     void (* print) (struct Figure*);
-    int  (* area)  (struct Figure*,int,int);
+    int  (* area)  (struct Figure*);
+    void (* move) (struct Figure*,int,int);
 } Figure_vtable;
 
 typedef struct Figure {
@@ -47,14 +47,14 @@ int Rect_area (Rect* this) {
 }
 
 Figure_vtable Rect_vtable = {
-    (Figure_Print) Rect_print;
-    (Figure_Area)  Rect_area;
-    (Figure_move)  Rect_move;
+    (Figure_Print) Rect_print,
+    (Figure_area)  Rect_area,
+    (Figure_move)  Rect_move
 };
 Rect* Rect_new (int x, int y, int w, int h) {
     Rect*   this  = malloc(sizeof(Rect));
     Figure* sup = (Figure*) this;
-    sup->vtable = &rect_vtable;
+    sup->vtable = &Rect_vtable;
     sup->x = x;
     sup->y = y;
     this->w = w;
@@ -87,9 +87,9 @@ int Arc_area (Arc* this) {
 }
 
 Figure_vtable Arc_vtable = {
-    (Figure_Print) Arc_print;
-    (Figure_Area)  Arc_area;
-    (Figure_move)  Arc_move;
+    (Figure_Print) Arc_print,
+    (Figure_area)  Arc_area,
+    (Figure_move)  Arc_move
 };
 
 Arc* Arc_new (int x, int y, int w, int h,int ang1,int ang2) {
