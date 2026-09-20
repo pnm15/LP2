@@ -12,14 +12,21 @@ typedef struct Figure {
     int x, y;
     Color fg, bg;
     void (* print) (struct Figure*);
+    void (* move) (struct Figure*);
 } Figure;
 
-///////////////////////////////////////////////////////////////////////////////
+//metodos e construtor de figure
 
 typedef struct {
     Figure super;
     int w, h;
-} Rect;
+} Line;
+
+void Line_move (Line* this,int dx,int dy) {
+    Figure* sup = (Figure*) this
+    sup->x+=dx;
+    sup->y+=dy;
+}
 
 void Line_print (Line* this) {
     Figure* sup = (Figure*) this;
@@ -28,16 +35,16 @@ void Line_print (Line* this) {
 }
 
 Line* Line_new (int x, int y, int w, int h) {
-    Rect*   this  = malloc(sizeof(Rect));
+    Line*   this  = malloc(sizeof(Line));
     Figure* sup = (Figure*) this;
-    sup->print = (Figure_Print) rect_print;
+    sup->print = (Figure_Print) Line_print;
     sup->x = x;
     sup->y = y;
     this->w = w;
     this->h = h;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+//metodos e construtor de Line
 
 typedef struct {
     Figure super;
@@ -54,7 +61,7 @@ void Arc_print (Arc* this) {
 Arc* Arc_new (int x, int y, int w, int h,int ang1,int ang2) {
     Arc* this = malloc(sizeof(Arc));
     Figure* sup = (Figure*) this;
-    sup->print = (Figure_Print) Ellipse_print;
+    sup->print = (Figure_Print) Arc_print;
     sup->x = x;
     sup->y = y;
     this->w = w;
@@ -63,7 +70,7 @@ Arc* Arc_new (int x, int y, int w, int h,int ang1,int ang2) {
     this->ang2 = ang2;
 }
 
-
+//metodos e construtor de Arc
 void main (void) {
     Figure* figs[4] = {
         (Figure*) Line_new(10,10,100,100),
@@ -77,7 +84,7 @@ void main (void) {
         figs[i]->print(figs[i]);
     }
 
-    ///
+    //cria as figuras dentro de um vetor
 
     for (int i=0; i<4; i++) {
         free(figs[i]);
