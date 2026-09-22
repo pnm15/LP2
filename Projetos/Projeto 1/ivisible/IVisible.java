@@ -1,10 +1,10 @@
 package ivisible;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.awt.Graphics;
-import figures.*;
 
 public interface IVisible {
     public boolean clicked (int x, int y);
-    public void    paint   (Graphics g);
-    public  abstract void drag(Figure fig,MouseEvent evt,int cto,int dx,int dy);
+    public void    paint   (Graphics g,boolean focused);
+    
 }
