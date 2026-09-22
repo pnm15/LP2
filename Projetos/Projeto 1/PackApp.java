@@ -15,7 +15,10 @@ public class PackApp {
 }  
 
 class PackFrame extends JFrame {
+    boolean focused;
+    Button focus_but=null;
     ArrayList<Figure> figs = new ArrayList<Figure>();
+    ArrayList<Button> buts = new ArrayList<Button>();
     Figure focus = null;
     Random rand = new Random();
     int dx=0,dy=0;
@@ -23,6 +26,8 @@ class PackFrame extends JFrame {
     int mx=0; int my=0;int mnx=0;int mny=0;
     Color c=null;
     PackFrame() {
+        buts.add(new Button(0,new Rect (0,0,0,0,Color.BLACK)));
+        buts.add(new Button(1,new Ellipse (0,0,0,0,Color.BLACK)));
         this.addWindowListener (
             new WindowAdapter() {
                     public void windowClosing (WindowEvent e) {
@@ -32,13 +37,13 @@ class PackFrame extends JFrame {
             );
         this.addMouseListener (new MouseAdapter() {
                 public void mousePressed (MouseEvent evt) {
-                    ArrayList<Figure> f2 = new ArrayList<Figure>();
+                    
                     focus = null;
                     for (Figure fig : figs) {
-			            if (fig.foco(fig,evt)!=null) {
+			            if (fig.foco(evt,fig)!=null) {
                             
-				            focus=fig.foco (fig,evt);
-				            cto=fig.cantofig(focus, fig,evt);
+				            focus=fig.foco (evt,fig);
+				            cto=fig.cantofig(evt);
 				            dx=evt.getX()-fig.x;
 		    		        dy=evt.getY()-fig.y;
 			            }
@@ -47,6 +52,12 @@ class PackFrame extends JFrame {
 		                figs.remove(focus);
 		    		    figs.add(focus);
 		    		}
+                    for (Button but : buts) {
+                        if (but.clicked(but.fig.x ,but.fig.y )){
+                            focus_but=but;
+                        
+                        }
+                    }
 		        }	
                 public void mouseReleased( MouseEvent evt ) {
                     repaint();
@@ -58,7 +69,7 @@ class PackFrame extends JFrame {
                 public void mouseDragged(MouseEvent evt) {
                        for (Figure fig: figs) {
                         if (focus==fig) {
-				        fig.drag(fig,evt,cto,dx,dy);
+				        fig.drag(evt,cto,dx,dy);
                         }
                        }
 			repaint();
@@ -67,8 +78,8 @@ class PackFrame extends JFrame {
         );
         this.addKeyListener (new KeyAdapter() {
             public void keyPressed (KeyEvent evt) {
-                    int x = 50;
-                    int y = 50;
+                    int x = 100;
+                    int y = 100;
                     int w = 20;
                     int h = 20;
 		            int ang1 = rand.nextInt(20);
@@ -156,10 +167,13 @@ class PackFrame extends JFrame {
         public void paint (Graphics g) {
                 super.paint(g);
             for (Figure fig:this.figs) {
-                fig.paint(g);
+                fig.paint(g,focused);
                 if (fig==focus) {
-                    fig.paintfocus(g,focus,fig);
+                    fig.paintfocus(g);
                 }     
 		   }
+            for (Button but: this.buts){
+                but.paint(g,but==focus_but);
+            }
        }
     }
