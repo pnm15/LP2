@@ -15,50 +15,49 @@ public class Line extends Figure {
             this.w, this.h, this.x, this.y);
     }
     @Override
-    public Figure foco (Figure fig,MouseEvent evt) { 
+    public Figure foco (MouseEvent evt,Figure fig) { 
  			int maiorx=0; int maiory=0; int menorx=0; int menory=0;
-			if (fig.x < (fig.x+fig.w)) {
-				 menorx = fig.x; 
-				maiorx = fig.x+fig.w;
+			if (this.x < (this.x+this.w)) {
+				 menorx = this.x; 
+				maiorx = this.x+this.w;
 			} 
-			if (fig.x > (fig.x+fig.w)) { 
-				menorx = fig.x+fig.w; 
-				maiorx = fig.x; 
+			if (this.x > (this.x+this.w)) { 
+				menorx = this.x+this.w; 
+				maiorx = this.x; 
 			} 
-			if (fig.y < (fig.y+fig.h)) { 
-				menory = fig.y; 
-				maiory = fig.y+fig.h; 
+			if (this.y < (this.y+this.h)) { 
+				menory = this.y; 
+				maiory = this.y+fig.h; 
 			} 
-			if (fig.y > (fig.y+fig.h)) { 
-				menory = fig.y+fig.h; 
-				maiory = fig.y; 
+			if (this.y > (this.y+this.h)) { 
+				menory = this.y+this.h; 
+				maiory = this.y; 
 			}
 			if (evt.getX() >= menorx && evt.getX() <= maiorx) {
 				if( evt.getY() >= menory && evt.getY() <= maiory) { 
-					return fig;
+					 return fig;
 				}
 			}
 			return null;
     }
     @Override
-    public int cantofig (Figure focus, Figure fig,MouseEvent evt) {
+    public int cantofig (MouseEvent evt) {
         int maiorx=0; int maiory=0; int menorx=0; int menory=0;
-        if (focus==fig){
-            if (fig.x < (fig.x+fig.w)) {
-				 menorx = fig.x; 
-				maiorx = fig.x+fig.w;
+            if (this.x < (this.x+this.w)) {
+				 menorx = this.x; 
+				maiorx = this.x+this.w;
 			} 
-			if (fig.x > (fig.x+fig.w)) { 
-				menorx = fig.x+fig.w; 
-				maiorx = fig.x; 
+			if (this.x > (this.x+this.w)) { 
+				menorx = this.x+this.w; 
+				maiorx = this.x; 
 			} 
-			if (fig.y < (fig.y+fig.h)) { 
-				menory = fig.y; 
-				maiory = fig.y+fig.h; 
+			if (this.y < (this.y+this.h)) { 
+				menory = this.y; 
+				maiory = this.y+this.h; 
 			} 
-			if (fig.y > (fig.y+fig.h)) { 
-				menory = fig.y+fig.h; 
-				maiory = fig.y; 
+			if (this.y > (this.y+this.h)) { 
+				menory = this.y+this.h; 
+				maiory = this.y; 
 			}
 		if (menorx <= evt.getX() && evt.getX() <= (menorx + 5)) {
     			if(menory <= evt.getY() && evt.getY() <=(menory+5)) {
@@ -80,36 +79,36 @@ public class Line extends Figure {
    				return 2;
 			}
 		}
-	}
 	return 0;
     }
      @Override
-     public void drag (Figure fig,MouseEvent evt,int cto,int dx,int dy) {
+     public void drag (MouseEvent evt,int cto,int dx,int dy) {
 		switch(cto) {
 			case 0:
-				fig.x = evt.getX()-dx;
-                fig.y = evt.getY()-dy;
+				this.x = evt.getX()-dx;
+                this.y = evt.getY()-dy;
 			break;
 
 			case 1:
 			
-				fig.w+=fig.x-evt.getX();
-				fig.h+=fig.y-evt.getY();
-				fig.x=evt.getX();
-				fig.y=evt.getY();
+				this.w+=this.x-evt.getX();
+				this.h+=this.y-evt.getY();
+				this.x=evt.getX();
+				this.y=evt.getY();
 				
 			break;
 
 			case 2:
-				fig.w = evt.getX() - fig.x;
-        		fig.h = evt.getY() - fig.y;
+				this.w = evt.getX() - this.x;
+        		this.h = evt.getY() - this.y;
 				
 			break;
 			}
 		}	
-    public void paint (Graphics g) {
+    @Override
+    public void paint (Graphics g,boolean focused) {
         Graphics2D g2d = (Graphics2D) g;
-	g2d.setColor(this.c);
-   	g2d.drawLine(this.x, this.y, this.x + this.w, this.y + this.h);
+	    g2d.setColor(this.c);
+   	    g2d.drawLine(this.x, this.y, this.x + this.w, this.y + this.h);
     }
 }
