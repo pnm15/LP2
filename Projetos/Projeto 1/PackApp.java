@@ -37,7 +37,13 @@ class PackFrame extends JFrame {
             );
         this.addMouseListener (new MouseAdapter() {
                 public void mousePressed (MouseEvent evt) {
-                    
+                    int x = 100;
+                    int y = 100;
+                    int w = 20;
+                    int h = 20;
+		            int ang1 = rand.nextInt(20);
+                    int ang2 = rand.nextInt(359);
+                   
                     focus = null;
                     for (Figure fig : figs) {
 			            if (fig.foco(evt,fig)!=null) {
@@ -52,15 +58,42 @@ class PackFrame extends JFrame {
 		                figs.remove(focus);
 		    		    figs.add(focus);
 		    		}
+                    if (focus_but!=null){ 
+                             switch (focus_but.idx) {
+                                case 0:
+                                    
+                                    Rect r = new Rect(evt.getX(),evt.getY(), w,h,c);
+                                    figs.add(focus=r);
+                                    
+                                break;
+                                case 1:
+                                    
+                                    figs.add(focus=new Ellipse(evt.getX(),evt.getY(), w,h,c));
+                                    
+                                break;
+                                case 2:
+                                    
+                                break;
+                                case 3:
+                                    
+                                break;
+                            }
+                            
+                            focus_but=null;
+                         }
                     for (Button but : buts) {
-                        if (but.clicked(but.fig.x ,but.fig.y )){
+                        if (but.clicked(evt.getX() ,evt.getY())){
                             focus_but=but;
-                        
+                            
+                            
                         }
-                    }
+                        
+                    }    
+                     
 		        }	
                 public void mouseReleased( MouseEvent evt ) {
                     repaint();
+                    
                 }  
             }
         );
@@ -69,7 +102,7 @@ class PackFrame extends JFrame {
                 public void mouseDragged(MouseEvent evt) {
                        for (Figure fig: figs) {
                         if (focus==fig) {
-				        fig.drag(evt,cto,dx,dy);
+				            fig.drag(evt,cto,dx,dy);
                         }
                        }
 			repaint();
@@ -106,11 +139,11 @@ class PackFrame extends JFrame {
                         c=Color.MAGENTA;
                     }
 		    if(c==null){
-			c=Color.BLACK;
+			    c=Color.BLACK;
 		    }
-                    if (evt.getKeyChar() == '1') {
+                    /*if (evt.getKeyChar() == '1') {
                         figs.add(new Carro(x,y, w,h,c));
-                    }
+                    } */
                     if (evt.getKeyChar() == '2') {
                         for (Figure fig: figs) {
                             if (focus!=null) {
@@ -167,10 +200,14 @@ class PackFrame extends JFrame {
         public void paint (Graphics g) {
                 super.paint(g);
             for (Figure fig:this.figs) {
-                fig.paint(g,focused);
+                   
                 if (fig==focus) {
-                    fig.paintfocus(g);
-                }     
+                    /*fig.paintfocus(g,fig.c);*/
+                }
+          
+                    fig.paint(g,fig==focus);
+                
+                   
 		   }
             for (Button but: this.buts){
                 but.paint(g,but==focus_but);
