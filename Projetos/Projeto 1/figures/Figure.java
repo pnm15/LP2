@@ -98,7 +98,7 @@ public abstract class Figure implements IVisible, Serializable {
 		}
 	return 0;
     }
-    public void paintfocus (Graphics g) {
+    /*public void paintfocus (Graphics g,Color c) {
             int x=this.x;
 		        int y=this.y;
 		        int w=this.w;
@@ -114,8 +114,14 @@ public abstract class Figure implements IVisible, Serializable {
    	                }
    	                 g.setColor(Color.RED);
     		        g.drawRect(x, y, w, h);   
+                    g.setColor(c);
     
+    } */
+    public boolean clicked (int x, int y) {
+        return (this.x<=x && x<=this.x+this.w && this.y<=y && y<=this.y+this.h);
     }
+    public abstract void paint (Graphics g,boolean focused) ;
+  } 
     public boolean clicked (int x, int y) {
         return (this.x<=x && x<=this.x+this.w && this.y<=y && y<=this.y+this.h);
     }
