@@ -27,17 +27,22 @@ public class Button implements IVisible {
 
     public void paint (Graphics g,boolean focused) {
         Graphics2D g2d = (Graphics2D) g;
-        if (focused) {
-            g2d.setColor(focused ? Color.GRAY : Color.DARK_GRAY);
-        }
-        else {
-    
-        g2d.setColor( focused ? Color.GRAY : Color.LIGHT_GRAY);
-        g2d.fillRect(SPC, SPC+this.idx*DIM, DIM, DIM);
+        /*if (focused) { */
+            g2d.setColor(focused ? Color.GRAY : Color.LIGHT_GRAY);
+            g2d.fillRect(SPC, SPC+this.idx*DIM, DIM, DIM);
 
-        g2d.setColor(Color.BLACK);
-        g2d.drawRect(SPC, SPC+this.idx*DIM, DIM, DIM);
+            g2d.setColor(Color.BLACK);
+            g2d.drawRect(SPC, SPC+this.idx*DIM, DIM, DIM);
+            this.fig.paint(g, false);
+        /* } */
+       /* else {
+    
+            g2d.setColor( focused ? Color.GRAY : Color.LIGHT_GRAY);
+            g2d.fillRect(SPC, SPC+this.idx*DIM, DIM, DIM);
+
+            g2d.setColor(Color.BLACK);
+            g2d.drawRect(SPC, SPC+this.idx*DIM, DIM, DIM);
         this.fig.paint(g, false);
-        }
+        } */
     }
 }
