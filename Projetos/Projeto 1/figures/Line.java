@@ -41,7 +41,7 @@ public class Line extends Figure {
 			return null;
     }
     @Override
-    public int cantofig (MouseEvent evt) {
+    public  int cantofig (MouseEvent evt) {
         int maiorx=0; int maiory=0; int menorx=0; int menory=0;
             if (this.x < (this.x+this.w)) {
 				 menorx = this.x; 

@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.awt.*;
 
 public class Button implements IVisible {
-    static int SPC = 40;
-    static int DIM = 40;
-    static int PAD = 4;
+    private int SPC = 40;
+    private int DIM = 40;
+    private int PAD = 4;
 
     public  int    idx;
     private Figure fig;

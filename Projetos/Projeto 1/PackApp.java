@@ -18,15 +18,16 @@ public class PackApp {
 
 class PackFrame extends JFrame {
     boolean focused;
-    Button focus_but=null;
-    ArrayList<Figure> figs = new ArrayList<Figure>();
-    ArrayList<Button> buts = new ArrayList<Button>();
-    Figure focus = null;
-    Random rand = new Random();
-    int dx=0,dy=0;
-    int cto=0;int i=0;
-    int mx=0; int my=0;int mnx=0;int mny=0;
-    Color c=null;
+    private Button focus_but=null;
+    private ArrayList<Figure> figs = new ArrayList<Figure>();
+    private ArrayList<Button> buts = new ArrayList<Button>();
+    private Figure focus = null;
+    private Random rand = new Random();
+    private int dx=0,dy=0;
+    private int cto=0;private int i=0;
+    private int mx=0; private int my=0;private int mnx=0;
+    private int mny=0;
+    private Color c=null;
     PackFrame() {
         try {
             FileInputStream f=new FileInputStream ("proj.bin");

@@ -12,7 +12,7 @@ public abstract class Figure implements IVisible, Serializable {
     public Color c;
 
 
-    public Figure (int x, int y, int w, int h,Color c) {
+    protected Figure (int x, int y, int w, int h,Color c) {
         this.x = x;
         this.y = y;
         this.w = w;
@@ -67,7 +67,7 @@ public abstract class Figure implements IVisible, Serializable {
 			break;
 		}
 	}	
-    public Figure foco (MouseEvent evt,Figure fig) {
+    public  Figure foco (MouseEvent evt,Figure fig) {
         if (this.x <= evt.getX() && evt.getX() <= this.x + this.w) { 
 		    if(this.y <= evt.getY() && evt.getY() <= this.y + this.h) {
 			    return fig; 
@@ -98,7 +98,7 @@ public abstract class Figure implements IVisible, Serializable {
 		}
 	return 0;
     }
-    /*public void paintfocus (Graphics g,Color c) {
+    /*protected  void paintfocus (Graphics g,Color c) {
             int x=this.x;
 		        int y=this.y;
 		        int w=this.w;
@@ -117,9 +117,9 @@ public abstract class Figure implements IVisible, Serializable {
                     g.setColor(c);
     
     } */
-    public boolean clicked (int x, int y) {
+    public  boolean clicked (int x, int y) {
         return (this.x<=x && x<=this.x+this.w && this.y<=y && y<=this.y+this.h);
     }
-    public abstract void paint (Graphics g,boolean focused) ;
+    public  abstract void paint (Graphics g,boolean focused) ;
   } 
 
