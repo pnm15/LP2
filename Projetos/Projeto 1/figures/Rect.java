@@ -18,7 +18,7 @@ public class Rect extends Figure {
     if (focused) {
             g2d.setPaint(Color.RED);
             g2d.drawRect(this.x-2,this.y-2, this.w+4,this.h+4);
-        }
+        } 
 	g2d.setPaint(Color.BLACK);
 	g2d.drawRect(this.x,this.y, this.w,this.h);
 

@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+import java.io.*;
+
 import figures.*;
 import ivisible.*;
 public class PackApp {
@@ -26,13 +28,34 @@ class PackFrame extends JFrame {
     int mx=0; int my=0;int mnx=0;int mny=0;
     Color c=null;
     PackFrame() {
+        try {
+            FileInputStream f=new FileInputStream ("proj.bin");
+            ObjectInputStream o=new ObjectInputStream(f);
+            this.figs=(ArrayList<Figure>) o.readObject();
+            o.close();
+        } catch (Exception x) {
+            System.out.println("ERRO!");
+        }
         buts.add(new Button(0,new Rect (0,0,0,0,Color.BLACK)));
         buts.add(new Button(1,new Ellipse (0,0,0,0,Color.BLACK)));
+        buts.add(new Button(2,new Line (0,0,0,0,Color.BLACK)));
+        buts.add(new Button(3,new Arc (0,0,0,0,Color.BLACK,90,270)));
         this.addWindowListener (
             new WindowAdapter() {
                     public void windowClosing (WindowEvent e) {
+                        try {
+                            FileOutputStream f= new FileOutputStream("proj.bin");
+                            ObjectOutputStream o= new ObjectOutputStream(f);
+                            o.writeObject(figs);
+                            o.flush();
+                            o.close();
+                        }
+                        catch (Exception x) {
+            System.out.println("ERRO 2!");
+        }
                         System.exit(0);
                     }
+            
                 }
             );
         this.addMouseListener (new MouseAdapter() {
@@ -72,10 +95,10 @@ class PackFrame extends JFrame {
                                     
                                 break;
                                 case 2:
-                                    
+                                    figs.add(focus=new Line(evt.getX(),evt.getY(), w,h,c));
                                 break;
                                 case 3:
-                                    
+                                    figs.add(focus=new Arc(evt.getX(),evt.getY(), w,h,c,ang1,ang2));
                                 break;
                             }
                             
@@ -91,6 +114,7 @@ class PackFrame extends JFrame {
                     }    
                      
 		        }	
+                
                 public void mouseReleased( MouseEvent evt ) {
                     repaint();
                     
@@ -214,3 +238,4 @@ class PackFrame extends JFrame {
             }
        }
     }
+

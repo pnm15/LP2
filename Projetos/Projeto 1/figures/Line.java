@@ -110,5 +110,10 @@ public class Line extends Figure {
         Graphics2D g2d = (Graphics2D) g;
 	    g2d.setColor(this.c);
    	    g2d.drawLine(this.x, this.y, this.x + this.w, this.y + this.h);
+        if (focused) {
+            g2d.setPaint(Color.RED);
+            g2d.drawLine(this.x, this.y, this.x + this.w, this.y + this.h);
+        }
+        g2d.setPaint(Color.BLACK);
     }
 }

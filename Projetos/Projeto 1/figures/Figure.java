@@ -122,8 +122,4 @@ public abstract class Figure implements IVisible, Serializable {
     }
     public abstract void paint (Graphics g,boolean focused) ;
   } 
-    public boolean clicked (int x, int y) {
-        return (this.x<=x && x<=this.x+this.w && this.y<=y && y<=this.y+this.h);
-    }
-    public abstract void paint (Graphics g,boolean focused) ;
-  } 
+

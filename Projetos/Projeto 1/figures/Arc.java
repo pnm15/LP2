@@ -22,5 +22,11 @@ public class Arc extends Figure {
 	g2d.setColor(this.c);
    	g2d.drawArc(this.x, this.y, this.w, this.h, this.ang1,this.ang2);
 	g2d.fillArc(this.x, this.y, this.w, this.h, this.ang1,this.ang2);
+        if (focused) {
+            g2d.setPaint(Color.RED);
+            g2d.drawArc(this.x-2, this.y-2, this.w+4, this.h+4, this.ang1,this.ang2);
+        }
+        g2d.setPaint(Color.BLACK);
     }
 }
+

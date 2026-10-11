@@ -15,11 +15,11 @@ public class Carro extends Figure {
     public void paint (Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
       g2d.setPaint(Color.BLACK);
- 
+	g2d.setColor(this.c);
+  
 	this.chassi.paint(g2d);
     this.roda1.paint(g2d);
     this.roda2.paint(g2d);
-    g2d.setColor(this.c);
     }
     @Override
      public Figure foco (Figure fig,MouseEvent evt) {
@@ -42,17 +42,14 @@ public class Carro extends Figure {
     @Override
     public void drag (Figure fig,MouseEvent evt,int cto,int dx,int dy) {
         cto=0;
-        
 		switch(cto) {
 			case 0:
                 fig.x = evt.getX()-dx;
                 fig.y = evt.getY()-dy;
-                this.roda1.x = evt.getX()-dx-this.roda1.w;
-                this.roda1.y = evt.getY()-dy+this.chassi.h;
-                this.roda2.x =evt.getX()-dx+this.chassi.w;
-                this.roda2.y = evt.getY()-dy+this.chassi.h;
                 
                 this.chassi.drag(this.chassi,evt,cto,dx,dy);
+                this.roda1.drag(this.roda1,evt,cto,dx,dy);
+                this.roda2.drag(this.roda2,evt,cto,dx,dy);
 			break;
 
 			case 1:
