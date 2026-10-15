@@ -7,12 +7,53 @@ import java.io.Serializable;
 import java.awt.event.*;
 
 public abstract class Figure implements IVisible, Serializable {
-    public int x, y;
-    public int w, h;
-    public Color c;
+    private int x, y;
+    private int w, h;
+    private Color c;
+    
+    public int getX() {
+        return x;
+    }
 
+    public void setX(int x) {
+        this.x = x;
+    }
+    
+    public int getY() {
+        return y;
+    }
 
-    protected Figure (int x, int y, int w, int h,Color c) {
+    public void setY(int y) {
+        this.y = y;
+    }
+    
+     public int getW() {
+        return w;
+    }
+
+    public void setW(int w) {
+        this.w = w;
+    }
+    
+     public int getH() {
+        return h;
+    }
+
+    public void setH(int h) {
+        this.h = h;
+    }
+    
+      public Color getC() {
+        return c;
+    }
+
+    public void setH(Color c) {
+        this.c = c;
+    }
+    
+    
+
+    Figure (int x, int y, int w, int h,Color c) {
         this.x = x;
         this.y = y;
         this.w = w;
@@ -98,7 +139,7 @@ public abstract class Figure implements IVisible, Serializable {
 		}
 	return 0;
     }
-    /*protected  void paintfocus (Graphics g,Color c) {
+    /*public void paintfocus (Graphics g,Color c) {
             int x=this.x;
 		        int y=this.y;
 		        int w=this.w;

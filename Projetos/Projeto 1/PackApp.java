@@ -74,8 +74,8 @@ class PackFrame extends JFrame {
                             
 				            focus=fig.foco (evt,fig);
 				            cto=fig.cantofig(evt);
-				            dx=evt.getX()-fig.x;
-		    		        dy=evt.getY()-fig.y;
+				            dx = evt.getX() - fig.getX();
+                            dy = evt.getY() - fig.getY();
 			            }
 		            }
 		            if (focus!=null) {
@@ -83,7 +83,7 @@ class PackFrame extends JFrame {
 		    		    figs.add(focus);
 		    		}
                     if (focus_but!=null){ 
-                             switch (focus_but.idx) {
+                             switch (focus_but.getIdx()) {
                                 case 0:
                                     
                                     Rect r = new Rect(evt.getX(),evt.getY(), w,h,c);
@@ -202,16 +202,16 @@ class PackFrame extends JFrame {
 		    for (Figure fig : figs) {
 			if (focus==fig) {
 				if(evt.getKeyCode() == 	evt.VK_UP) {
-					fig.y-=5;
+					fig.setY(fig.getY()-5);
 				}
 				if(evt.getKeyCode() == 	evt.VK_LEFT) {
-					fig.x-=5;
+					fig.setX(fig.getX()-5);
 				}
 				if(evt.getKeyCode() == 	evt.VK_DOWN) {
-					fig.y+=5;
+					fig.setY(fig.getY()+5);
 				}
 				if(evt.getKeyCode() == 	evt.VK_RIGHT) {
-					fig.x+=5;
+					fig.setX(fig.getX()+5);
 				}
 			}
 		    }

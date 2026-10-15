@@ -8,16 +8,22 @@ public class Button implements IVisible {
     private int DIM = 40;
     private int PAD = 4;
 
-    public  int    idx;
+    private  int    idx;
     private Figure fig;
+    public int getIdx() {
+        return idx;
+    }
 
+    public void setIdx(int idx) {
+        this.idx = idx;
+    }
     public Button (int idx, Figure fig) {
         this.idx = idx;
         this.fig = fig;
-        this.fig.x = PAD+SPC;
-        this.fig.y = PAD+SPC + idx*DIM;
-        this.fig.w = DIM-PAD*2;
-        this.fig.h = DIM-PAD*2;
+        this.fig.setX(PAD + SPC);
+        this.fig.setY(PAD + SPC + idx * DIM);
+        this.fig.setW(DIM - PAD * 2);
+        this.fig.setH(DIM - PAD * 2);
        
     }
 

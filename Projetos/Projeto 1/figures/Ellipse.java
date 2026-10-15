@@ -13,21 +13,21 @@ public class Ellipse extends Figure {
 
     public void print () {
         System.out.format("Elipse de tamanho (%d,%d) na posicao (%d,%d).\n",
-            this.w, this.h, this.x, this.y,this.c);
+            getW(),getH(),getX(),getY());
     }
 
     public void paint (Graphics g,boolean focused) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(this.c);
-        g2d.fillOval(this.x,this.y, this.w,this.h);
+        g2d.setColor(getC());
+        g2d.fillOval(getX(),getY(), getW(),getH());
     if (focused) {
             g2d.setPaint(Color.RED);
-            g2d.drawOval(this.x-2,this.y-2, this.w+4,this.h+4);
+            g2d.drawOval(getX()-2, getY()-2, getW()+4, getH()+4);
             
         }
     
   	 g2d.setPaint(Color.BLACK);
-        g2d.drawOval(this.x,this.y, this.w,this.h);
+        g2d.drawOval(getX(),getY(), getW(),getH());
         
     }
 }
