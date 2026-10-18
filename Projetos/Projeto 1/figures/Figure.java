@@ -139,25 +139,7 @@ public abstract class Figure implements IVisible, Serializable {
 		}
 	return 0;
     }
-    /*public void paintfocus (Graphics g,Color c) {
-            int x=this.x;
-		        int y=this.y;
-		        int w=this.w;
-		        int h=this.h;
-          
-                    if(this.w<0) {
-   	                 w=-w;
-   	                 x-=w;
-   	                }
-   	            if(this.h<0) {
-   	                 h=-h;
-   	                 y-=h;
-   	                }
-   	                 g.setColor(Color.RED);
-    		        g.drawRect(x, y, w, h);   
-                    g.setColor(c);
     
-    } */
     public  boolean clicked (int x, int y) {
         return (this.x<=x && x<=this.x+this.w && this.y<=y && y<=this.y+this.h);
     }

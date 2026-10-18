@@ -17,22 +17,23 @@ public class Line extends Figure {
     @Override
     public Figure foco (MouseEvent evt,Figure fig) { 
  			int maiorx=0; int maiory=0; int menorx=0; int menory=0;
-			if (getX() < (getX()+getW())) {
-				 menorx = getX(); 
-				maiorx = getX()+getW();
-			} 
-			if (getX() > (getX()+getW())) { 
-				menorx = getX()+getW(); 
-				maiorx = getX(); 
-			} 
-			if (getY() < (getY()+getH())) { 
-				menory = getY(); 
-				maiory = getY()+getH(); 
-			} 
-			if (getY() > (getY()+getH())) { 
-				menory = getY()+getH(); 
-				maiory = getY(); 
-			}
+			if (getX() < getX() + getW()) {
+                menorx = getX();
+                maiorx = getX() + getW();
+            } 
+            else {
+                menorx = getX() + getW();
+                maiorx = getX();
+            }
+
+            if (getY() < getY() + getH()) {
+                menory = getY();
+                maiory = getY() + getH();
+            }           
+            else {
+                menory = getY() + getH();
+                maiory = getY();
+            }
 			if (evt.getX() >= menorx && evt.getX() <= maiorx) {
 				if( evt.getY() >= menory && evt.getY() <= maiory) { 
 					 return fig;
@@ -42,45 +43,21 @@ public class Line extends Figure {
     }
     @Override
     public  int cantofig (MouseEvent evt) {
-        int maiorx=0; int maiory=0; int menorx=0; int menory=0;
-            if (getX() < (getX()+getW())) {
-				 menorx = getX(); 
-				maiorx = getX()+getW();
-			} 
-			if (getX() > (getX()+getW())) { 
-				menorx = getX()+getW(); 
-				maiorx = getX(); 
-			} 
-			if (getY() < (getY()+getH())) { 
-				menory = getY(); 
-				maiory = getY()+getH(); 
-			} 
-			if (getY() > (getY()+getH())) { 
-				menory = getY()+getH(); 
-				maiory = getY(); 
-			}
-		if (menorx <= evt.getX() && evt.getX() <= (menorx + 5)) {
-    			if(menory <= evt.getY() && evt.getY() <=(menory+5)) {
+		if (getX()-5 <= evt.getX() && getX() +5 >= evt.getX()) {
+    			if(getY()-5 <= evt.getY() && getY() +5 >= evt.getY()) {
     				return 1;
 			}
 		}
-		if ((maiorx-5) <= evt.getX() && evt.getX() <= maiorx) {
-    			if(menory <= evt.getY() && evt.getY() <=(menory+5)) {
-    				return 1;
+		if (getX()+getW()-5 <= evt.getX() && getX()+getW() +5 >= evt.getX()) {
+    		if(getY()+getH()-5 <= evt.getY() && getY()+getH() +5 >= evt.getY()){
+    				return 2;
 			}
 		}
-		if ((maiorx - 5) <= evt.getX() && evt.getX() <= maiorx) {
-    			if((maiory-5) <= evt.getY() && evt.getY() <= maiory) {
-   				return 2;
-			}
+	
+		return 0;
 		}
-		if (menorx <= evt.getX() && evt.getX() <= (menorx + 5)) {
-    			if((maiory-5) <= evt.getY() && evt.getY() <= maiory) {
-   				return 2;
-			}
-		}
-	return 0;
-    }
+	  
+    
      @Override
      public void drag (MouseEvent evt,int cto,int dx,int dy) {
 		switch(cto) {
@@ -99,10 +76,11 @@ public class Line extends Figure {
 			break;
 
 			case 2:
-				setW(getW()-getX()+evt.getX());
-        		setH(getH()-getY()+evt.getY());
+				setW(evt.getX() - getX());
+                setH(evt.getY() - getY());
+            break;
 				
-			break;
+			
 			}
 		}	
     @Override

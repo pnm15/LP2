@@ -13,4 +13,8 @@ tecla backspace= apaga a figura em foco,
 teclas de setas movimentam a imagem em foco para baixo,cima,esquerda ou direita,  
 Clique em cima da figura para que o foco seja atualizado,  
 Clique e arraste a imagem para mudá-la de lugar  
-Clique e arraste a figura pelas pontas para redimensionar  
+Clique e arraste a figura pelas pontas para redimensionar 
+
+No menu de botoes,clique na cor,depois na figura desejada e depois 
+em qualquer lugar da tela, para adicionar a figura com a cor selecionada
+

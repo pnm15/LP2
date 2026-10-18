@@ -19,8 +19,10 @@ public class PackApp {
 class PackFrame extends JFrame {
     boolean focused;
     private Button focus_but=null;
+    private Button focus_but2=null;
     private ArrayList<Figure> figs = new ArrayList<Figure>();
     private ArrayList<Button> buts = new ArrayList<Button>();
+    private ArrayList<Button> butsc = new ArrayList<Button>();
     private Figure focus = null;
     private Random rand = new Random();
     private int dx=0,dy=0;
@@ -37,10 +39,21 @@ class PackFrame extends JFrame {
         } catch (Exception x) {
             System.out.println("ERRO!");
         }
-        buts.add(new Button(0,new Rect (0,0,0,0,Color.BLACK)));
-        buts.add(new Button(1,new Ellipse (0,0,0,0,Color.BLACK)));
-        buts.add(new Button(2,new Line (0,0,0,0,Color.BLACK)));
-        buts.add(new Button(3,new Arc (0,0,0,0,Color.BLACK,90,270)));
+        buts.add(new Button(1,0,60,40,4,new Rect (20,20,0,0,Color.BLACK)));
+        buts.add(new Button(2,0,60,40,4,new Ellipse (20,20,0,0,Color.BLACK)));
+        buts.add(new Button(3,0,60,40,4,new Line (20,20,0,0,Color.BLACK)));
+        buts.add(new Button(4,0,60,40,4,new Arc (20,20,0,0,Color.BLACK,90,270)));
+        
+        
+        butsc.add(new Button(0,1,36,24,4,new Ellipse (20,20,0,0,Color.GREEN)));
+        butsc.add(new Button(0,2,36,24,4,new Ellipse (20,20,0,0,Color.RED)));
+        butsc.add(new Button(0,3,36,24,4,new Ellipse (20,20,0,0,Color.BLUE)));
+        butsc.add(new Button(0,4,36,24,4,new Ellipse (20,20,0,0,Color.YELLOW)));
+        butsc.add(new Button(0,5,36,24,4,new Ellipse (20,20,0,0,Color.ORANGE)));
+        butsc.add(new Button(0,6,36,24,4,new Ellipse (20,20,0,0,Color.GRAY)));
+        butsc.add(new Button(0,7,36,24,4,new Ellipse (20,20,0,0,Color.MAGENTA)));
+        butsc.add(new Button(0,8,36,24,4,new Ellipse (20,20,0,0,Color.BLACK))); 
+        
         this.addWindowListener (
             new WindowAdapter() {
                     public void windowClosing (WindowEvent e) {
@@ -82,37 +95,90 @@ class PackFrame extends JFrame {
 		                figs.remove(focus);
 		    		    figs.add(focus);
 		    		}
-                    if (focus_but!=null){ 
+		    		focus_but2=null;
+		    		for (Button but : buts) {
+                        if (but.clicked(evt.getX() ,evt.getY())){
+                            focus_but2=but; 
+                        }
+                        
+                    } 
+		    		for (Button but : butsc) {
+                        if (but.clicked(evt.getX() ,evt.getY())){
+                            focus_but2=but; 
+                        }
+                 
+                        
+                    }  
+                    if (focus_but!=null && focus_but2==null){ 
                              switch (focus_but.getIdx()) {
-                                case 0:
+                                case 1:
                                     
                                     Rect r = new Rect(evt.getX(),evt.getY(), w,h,c);
                                     figs.add(focus=r);
                                     
                                 break;
-                                case 1:
+                                case 2:
                                     
                                     figs.add(focus=new Ellipse(evt.getX(),evt.getY(), w,h,c));
                                     
                                 break;
-                                case 2:
+                                case 3:
                                     figs.add(focus=new Line(evt.getX(),evt.getY(), w,h,c));
                                 break;
-                                case 3:
+                                case 4:
                                     figs.add(focus=new Arc(evt.getX(),evt.getY(), w,h,c,ang1,ang2));
                                 break;
                             }
                             
                             focus_but=null;
+                            focus_but2=null;
+                            
+                         }
+                     if (focus_but!=null) {
+                         switch (focus_but.getIdxc()) {
+                                case 1:
+                                    
+                                    c=Color.GREEN;
+                                    
+                                break;
+                                case 2:
+                                    
+                                    c=Color.RED;
+                                    
+                                break;
+                                case 3:
+                                    c=Color.BLUE;
+                                break;
+                                case 4:
+                                    c=Color.YELLOW;
+                                break;
+                                case 5:
+                                    c=Color.ORANGE;
+                                break;
+                                case 6:
+                                    c=Color.GRAY;
+                                break;
+                                case 7:
+                                    c=Color.MAGENTA;
+                                break;
+                                case 8:
+                                    c=Color.BLACK;
+                                break;
+                            }
+                            focus_but=null;
                          }
                     for (Button but : buts) {
                         if (but.clicked(evt.getX() ,evt.getY())){
-                            focus_but=but;
-                            
-                            
+                            focus_but=but; 
                         }
                         
                     }    
+                    for (Button but : butsc) {
+                        if (but.clicked(evt.getX() ,evt.getY())){
+                            focus_but=but; 
+                        }
+                        
+                    }  
                      
 		        }	
                 
@@ -166,9 +232,7 @@ class PackFrame extends JFrame {
 		    if(c==null){
 			    c=Color.BLACK;
 		    }
-                    /*if (evt.getKeyChar() == '1') {
-                        figs.add(new Carro(x,y, w,h,c));
-                    } */
+                    
                     if (evt.getKeyChar() == '2') {
                         for (Figure fig: figs) {
                             if (focus!=null) {
@@ -226,15 +290,16 @@ class PackFrame extends JFrame {
                 super.paint(g);
             for (Figure fig:this.figs) {
                    
-                if (fig==focus) {
-                    /*fig.paintfocus(g,fig.c);*/
-                }
+                
           
                     fig.paint(g,fig==focus);
                 
                    
 		   }
             for (Button but: this.buts){
+                but.paint(g,but==focus_but);
+            }
+            for (Button but: this.butsc){
                 but.paint(g,but==focus_but);
             }
        }
