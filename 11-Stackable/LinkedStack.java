@@ -1,24 +1,28 @@
-/*LinkedList: size,addFirst,removeFirst */
-public class LinkedStack<Item> implements Iterable<Item> {
-    private int n;          // size of the stack
-    private Node first;     // top of stack
+package stack;
 
-    // helper linked list class
+public class LinkedStack implements IStackable
+{
+    private int n;
+    private Node first;
+
     private class Node {
         private int v;
         private Node next;
     }
-     public LinkedStack() {
+
+    public LinkedStack() {
         first = null;
         n = 0;
-        
     }
+
     public boolean isEmpty() {
         return first == null;
     }
-     public int size() {
+
+    public int size() {
         return n;
     }
+
     public void push(int v) {
         Node oldfirst = first;
         first = new Node();
@@ -26,10 +30,12 @@ public class LinkedStack<Item> implements Iterable<Item> {
         first.next = oldfirst;
         n++;
     }
+
     public int pop() {
-        if (isEmpty()) throw new NoSuchElementException("Stack underflow");
-        int v = first.v;        // save item to return
-        first = first.next;            // delete first node
+        if (isEmpty()) throw new java.util.NoSuchElementException("Stack underflow");
+        int v = first.v;
+        first = first.next;
         n--;
-        return int;                   // return the saved item
+        return v;
     }
+}
