@@ -1,6 +1,4 @@
-package stack;
-
-public class ArrayStack implements Stack
+public class ArrayStack implements IStackable
 {
     private int size = 0;
     private int[] element;
@@ -20,9 +18,9 @@ public class ArrayStack implements Stack
         return this.size;
     }
 
-    public void push(Object theElement)
+    public void push(int v)
     {
-        this.element[this.size] = (Integer) theElement;
+        this.element[this.size] = v;
         this.size++;
     }
 
